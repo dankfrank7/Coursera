@@ -6,6 +6,35 @@
     "configurations": [
         {
             "type": "java",
+            "name": "UF",
+            "request": "launch",
+            "mainClass": "Week1.UF",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "RandomWord",
+            "request": "launch",
+            "mainClass": "Introduction.RandomWord",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "HelloGoodbye",
+            "request": "launch",
+            "mainClass": "Introduction.HelloGoodbye",
+            "projectName": "Coursera_75b50552",
+            "args": "Tom Anna"
+        },
+        {
+            "type": "java",
+            "name": "HelloWorld",
+            "request": "launch",
+            "mainClass": "Introduction.HelloWorld",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -29,8 +58,8 @@
             "name": "RandomWord",
             "request": "launch",
             "mainClass": "RandomWord",
-            "projectName": "Coursera_75b50552", 
-            "console":"integratedTerminal",
+            "projectName": "Coursera_75b50552",
+            "console": "integratedTerminal"
         }
     ]
 }
