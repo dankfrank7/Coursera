@@ -1,17 +1,12 @@
-package Algorithms1;
 public class HelloGoodbye {
     public static void main(String[] args) {
-        
-        // Check if at least two arguments were passed
-        if (args.length < 2) {
-            System.out.println("Error: must pass at least 2 arguments");
-        
-        // If so print out hello and goodbye messages
+        // Ensure exactly two arguments are passed
+        if (args.length != 2) {
+            System.err.println("Error: Exactly two arguments required.");
         } else {
-            String helloMessage = "Hello " + args[0] + " and " + args[1] + ".";
-            String goodbyeMessage = "Goodbye " + args[0] + " and " + args[1] + ".";
-            System.out.println(helloMessage);
-            System.out.println(goodbyeMessage);
+            // Print hello and goodbye messages directly
+            System.out.println("Hello " + args[0] + " and " + args[1] + ".");
+            System.out.println("Goodbye " + args[0] + " and " + args[1] + ".");
         }
     }
 }

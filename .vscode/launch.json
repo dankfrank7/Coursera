@@ -6,25 +6,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "RandomWord",
-            "request": "launch",
-            "mainClass": "RandomWord",
-            "projectName": "Coursera_75b50552",
-            "args": "cheese"
-        },
-        {
-            "type": "java",
             "name": "HelloGoodbye",
             "request": "launch",
             "mainClass": "HelloGoodbye",
             "projectName": "Coursera_75b50552",
-            "args": "Tom Anna Maddie"
-        },
-        {
-            "type": "java",
-            "name": "Current File",
-            "request": "launch",
-            "mainClass": "${file}"
+            "args": "Tom Anna"
         },
         {
             "type": "java",
@@ -32,6 +18,12 @@
             "request": "launch",
             "mainClass": "HelloWorld",
             "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
         }
     ]
 }
