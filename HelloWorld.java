@@ -1,9 +1,14 @@
-public class HelloWorld {
+C:\Program Files\Java\jre-1.8\binpublic class HelloWorld {
     public static void main(String[] args) {
+        
+        // Print Hello World
         System.out.println("Hello World!");
-        System.out.println("Second commit!")
+        
+        // Also print the arguments
+        for (String arg: args) {
+            System.out.println(arg);
+        }
+
     }
 }
 
-
-// Does this work??
