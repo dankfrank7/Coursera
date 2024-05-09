@@ -1,4 +1,4 @@
-C:\Program Files\Java\jre-1.8\binpublic class HelloWorld {
+public class HelloWorld {
     public static void main(String[] args) {
         
         // Print Hello World
