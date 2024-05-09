@@ -6,11 +6,16 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
             "name": "HelloGoodbye",
             "request": "launch",
             "mainClass": "HelloGoodbye",
-            "projectName": "Coursera_75b50552",
-            "args": "Tom Anna"
+            "projectName": "Coursera_75b50552"
         },
         {
             "type": "java",
@@ -21,9 +26,11 @@
         },
         {
             "type": "java",
-            "name": "Current File",
+            "name": "RandomWord",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "RandomWord",
+            "projectName": "Coursera_75b50552", 
+            "console":"integratedTerminal",
         }
     ]
 }
