@@ -6,6 +6,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "HelloGoodbye",
+            "request": "launch",
+            "mainClass": "HelloGoodbye",
+            "projectName": "Coursera_75b50552", 
+            "args": "Tom Anna Maddie"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -15,7 +23,7 @@
             "name": "HelloWorld",
             "request": "launch",
             "mainClass": "HelloWorld",
-            "projectName": "Coursera_75b50552",
+            "projectName": "Coursera_75b50552"
         }
     ]
 }
