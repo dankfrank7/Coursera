@@ -6,10 +6,18 @@
     "configurations": [
         {
             "type": "java",
+            "name": "RandomWord",
+            "request": "launch",
+            "mainClass": "RandomWord",
+            "projectName": "Coursera_75b50552",
+            "args": "cheese"
+        },
+        {
+            "type": "java",
             "name": "HelloGoodbye",
             "request": "launch",
             "mainClass": "HelloGoodbye",
-            "projectName": "Coursera_75b50552", 
+            "projectName": "Coursera_75b50552",
             "args": "Tom Anna Maddie"
         },
         {
