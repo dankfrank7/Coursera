@@ -6,6 +6,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PercolationStats",
+            "request": "launch",
+            "mainClass": "Week1.PercolationStats",
+            "projectName": "Coursera_75b50552", 
+            "args": "200 100"
+        },
+        {
+            "type": "java",
             "name": "Percolation",
             "request": "launch",
             "mainClass": "Week1.Percolation",

@@ -1,7 +1,4 @@
 package Week1;
-import java.util.Arrays;
-import edu.princeton.cs.algs4.StdRandom;
-import edu.princeton.cs.algs4.StdStats;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
@@ -9,6 +6,7 @@ public class Percolation {
     private boolean[][] grid;
     private int n;
     private WeightedQuickUnionUF uf;
+    private WeightedQuickUnionUF fullUf;
     private int topVirtualIndex;
     private int botVirtualIndex;
     private int openSiteCount = 0;
@@ -20,9 +18,12 @@ public class Percolation {
 
         this.grid = new boolean[n][n];
         this.n = n;
-        this.uf = new WeightedQuickUnionUF(n * n + 2);
         this.topVirtualIndex = n * n;
         this.botVirtualIndex = n * n + 1;
+
+        // We need to create two instnaces uf: connected top and bottom, fullUf: only connected to top
+        this.uf = new WeightedQuickUnionUF(n * n + 2);
+        this.fullUf = new WeightedQuickUnionUF(n * n + 1);
     }
 
     public void open(int row, int col) {
@@ -34,9 +35,12 @@ public class Percolation {
 
             int index = xyTo1D(row, col);
 
+            // Connect to top virtual site
             if (row == 1) {
                 uf.union(index, topVirtualIndex);
+                fullUf.union(index, topVirtualIndex);
             }
+            // Connect to bottom virtual site
             if (row == n) {
                 uf.union(index, botVirtualIndex);
             }
@@ -46,7 +50,7 @@ public class Percolation {
             connectIfOpen(row, col, row, col - 1);
             connectIfOpen(row, col, row, col + 1);
 
-            printMatrix(grid);
+            //printMatrix(grid);
         }
     }
 
@@ -56,6 +60,7 @@ public class Percolation {
                 int index = xyTo1D(row, col);
                 int adjIndex = xyTo1D(adjRow, adjCol);
                 uf.union(index, adjIndex);
+                fullUf.union(index, adjIndex);
             }
         }
     }
@@ -73,7 +78,7 @@ public class Percolation {
 
     public boolean isFull(int row, int col) {
         int index = xyTo1D(row, col);
-        return isOpen(row, col) && uf.find(index) == uf.find(topVirtualIndex);
+        return isOpen(row, col) && fullUf.find(index) == fullUf.find(topVirtualIndex);
     }
 
     public int numberOfOpenSites() {
@@ -88,11 +93,11 @@ public class Percolation {
         return (row - 1) * n + (col-1);
     }
 
-    public boolean[][] get_grid() {
+    private boolean[][] get_grid() {
         return this.grid;
     }
 
-    public static void printMatrix(boolean[][] matrix) {
+    private static void printMatrix(boolean[][] matrix) {
         System.out.println("-");
         for (boolean[] row : matrix) {
             for (boolean value : row) {
@@ -103,7 +108,7 @@ public class Percolation {
         }
     }
 
-    // Monte-Carlo sim test client 
+    // test client 
     public static void main(String[] args) {
 
         // Initialise all sites to be blocked
@@ -119,14 +124,5 @@ public class Percolation {
         perc.open(5, 2);
         System.out.println("Percolates: " + perc.percolates());
         System.out.println("Open Sites: " + perc.numberOfOpenSites());
-
-        // Repeat the following until percolates 
-
-            // Chose a site uniformly at random among all blocked sites
-
-            // Open the site
-
-        // The fraction of sites that are open when system percolates is estimate of perc threshold 
-
     }
 }
