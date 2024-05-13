@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Percolation",
+            "request": "launch",
+            "mainClass": "Week1.Percolation",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
             "name": "UF",
             "request": "launch",
             "mainClass": "Week1.UF",

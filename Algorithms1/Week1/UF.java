@@ -6,12 +6,14 @@ public class UF {
 
     //private QuickFindUF alg; 
     //private QuickUnion alg; 
-    private WeightedQuickUnion alg;
+    //private WeightedQuickUnion alg;
+    private PathCompressionWQU alg;
 
     public UF(int N) {
         // Constructor
         //alg = new QuickFindUF(N);
-        alg = new WeightedQuickUnion(N);
+        //alg = new WeightedQuickUnion(N);
+        alg = new PathCompressionWQU(N);
     }
 
     public void union(int p, int q) {
