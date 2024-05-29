@@ -6,10 +6,52 @@
     "configurations": [
         {
             "type": "java",
+            "name": "RandomizedQueue",
+            "request": "launch",
+            "mainClass": "Week2.RandomizedQueue",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "Deque",
+            "request": "launch",
+            "mainClass": "Week2.Deque",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "Evaluate",
+            "request": "launch",
+            "mainClass": "Week2.Evaluate",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "FixedCapacityOfStrings",
+            "request": "launch",
+            "mainClass": "Week2.FixedCapacityOfStrings",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "ResizingArrayStackOfStrings",
+            "request": "launch",
+            "mainClass": "Week2.ResizingArrayStackOfStrings",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "LinkedStackOfString",
+            "request": "launch",
+            "mainClass": "Week2.LinkedStackOfString",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
             "name": "PercolationStats",
             "request": "launch",
             "mainClass": "Week1.PercolationStats",
-            "projectName": "Coursera_75b50552", 
+            "projectName": "Coursera_75b50552",
             "args": "200 100"
         },
         {
