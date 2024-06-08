@@ -1,4 +1,4 @@
-package Week2;
+//package Week2;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
@@ -102,7 +102,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private class ListIterator implements Iterator<Item> {
-        private Node currentIt = head;
+        private Node currentIt;
         private final int[] order = StdRandom.permutation(size);
         private int index = 0;
 
@@ -111,6 +111,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
 
         public Item next() {
+            currentIt = head;
             if (!hasNext()) {
                 throw new NoSuchElementException("No more items to return");
             }

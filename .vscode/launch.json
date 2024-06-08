@@ -6,6 +6,36 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Date",
+            "request": "launch",
+            "mainClass": "Date",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "StringSorter",
+            "request": "launch",
+            "mainClass": "StringSorter",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "Experiment",
+            "request": "launch",
+            "mainClass": "Experiment",
+            "projectName": "Coursera_75b50552",
+            "args": "10"
+        },
+        {
+            "type": "java",
+            "name": "Permutation",
+            "request": "launch",
+            "mainClass": "Week2.Permutation",
+            "projectName": "Coursera_75b50552",
+            "args": "3"
+        },
+        {
+            "type": "java",
             "name": "RandomizedQueue",
             "request": "launch",
             "mainClass": "Week2.RandomizedQueue",
