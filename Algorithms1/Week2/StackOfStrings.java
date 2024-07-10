@@ -25,12 +25,13 @@ public class StackOfStrings {
         return first == null;
     }
 
-    private size() {
+    public int size() {
         int count = 0;
-        while (node.next != null) {
-            first = 
+        while (first.next != null) {
+            first = first.next;
             count++;
         }
+        return count;
     }
 
     private class Node {
@@ -43,7 +44,7 @@ public class StackOfStrings {
         Scanner scanner = new Scanner(System.in);
 
         while (scanner.hasNext()) {
-            String s = scanner.next()
+            String s = scanner.next();
             
             if (s.equals("-")) {
                 System.out.println(stack.pop());

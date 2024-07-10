@@ -1,24 +1,19 @@
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-
-public class Selection {
+public class Insertion {
     public static void sort(Comparable[] a) {
         int N = a.length; 
         
-        // outer loop
+        // main loop 
         for (int i = 0; i < N; i++) {
-            
-            // index of inner loop minumum
-            int min = i; 
-
-            // inner loop 
-            for (int j = i + 1; j < N; j++) {
-                if (less(a[j], a[min])) {
-                    min = j;
-                }
+        
+            // inner loop
+            for (int j = i; j > 0; j--) {
+                if (less(a[j], a[j-1])) {
+                    exch(a, j, j-1);
+                } else break;
             }
-            exch(a, i, min);
         }
     }
 
@@ -34,7 +29,7 @@ public class Selection {
 
     public static void main(String[] args) {
         String[] a = StdIn.readAllStrings();
-        Selection.sort(a);
+        Insertion.sort(a);
         for (String s: a) StdOut.println(s);
     }
 }

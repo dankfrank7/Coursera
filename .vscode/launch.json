@@ -6,6 +6,55 @@
     "configurations": [
         {
             "type": "java",
+            "name": "BruteCollinearPoints",
+            "request": "launch",
+            "mainClass": "Week3.BruteCollinearPoints",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "MergeBU",
+            "request": "launch",
+            "mainClass": "Week3.MergeBU",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "Merge",
+            "request": "launch",
+            "mainClass": "Week3.Merge",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "Point2D",
+            "request": "launch",
+            "mainClass": "Point2D",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "Shell",
+            "request": "launch",
+            "mainClass": "Shell",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "Insertion",
+            "request": "launch",
+            "mainClass": "Insertion",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "Selection",
+            "request": "launch",
+            "mainClass": "Selection",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
             "name": "Date",
             "request": "launch",
             "mainClass": "Date",

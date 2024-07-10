@@ -1,7 +1,4 @@
-package Week2;
-
 import java.util.Iterator;
-
 import edu.princeton.cs.algs4.StdOut;
 
 
