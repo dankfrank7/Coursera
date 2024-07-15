@@ -6,10 +6,19 @@
     "configurations": [
         {
             "type": "java",
+            "name": "FastCollinearPoints",
+            "request": "launch",
+            "mainClass": "Week3.FastCollinearPoints",
+            "projectName": "Coursera_75b50552",
+            "args": "Week3/input6.txt"
+        },
+        {
+            "type": "java",
             "name": "BruteCollinearPoints",
             "request": "launch",
             "mainClass": "Week3.BruteCollinearPoints",
-            "projectName": "Coursera_75b50552"
+            "projectName": "Coursera_75b50552",
+            "args": "Week3/input8.txt"
         },
         {
             "type": "java",

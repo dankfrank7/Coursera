@@ -6,36 +6,58 @@ import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.In;
 
-public class BruteCollinearPoints {
+public class FastCollinearPoints {
     private final ArrayList<LineSegment> segmentsList = new ArrayList<>();
 
-    // finds all line segments containing 4 points
-    public BruteCollinearPoints(Point[] points) {
+
+    // finds all line segments containing 4 or more points
+    public FastCollinearPoints(Point[] points){
+        if (points == null) throw new IllegalArgumentException("Argument is null");
         for (Point point : points) {
             if (point == null) throw new IllegalArgumentException("Point in array is null");
         }
         checkDuplicates(points);
 
-        int N = points.length;
-        
-        // Brute force loop through every combination of 4 points
-        for (int i = 0; i < N - 3; i++) {
-            for (int j = i + 1; j < N - 2; j++) {
-                for (int k = j + 1; k < N - 1; k++) {
-                    for (int l = k + 1; l < N; l++) {
-                        Point p = points[i];
-                        Point q = points[j];
-                        Point r = points[k];
-                        Point s = points[l];
+        Point[] sortedPoints = points.clone();
 
-                        if (p.slopeOrder().compare(q, r) == 0 && p.slopeOrder().compare(q, s) == 0) {
-                            Point[] collinearPoints = {p, q, r, s};
-                            Arrays.sort(collinearPoints);
-                            segmentsList.add(new LineSegment(collinearPoints[0], collinearPoints[3]));
-                        }
+        for (Point p : points) {
+            Arrays.sort(sortedPoints, p.slopeOrder());
+
+            int count = 1; 
+            Double prevSlope = p.slopeTo(sortedPoints[0]);
+
+            for (int j = 1; j < sortedPoints.length; j++) {
+                double currentSlope = p.slopeTo(sortedPoints[j]);
+
+                if (Double.compare(currentSlope, prevSlope) == 0) {
+                    count++;
+                } else {
+                    if (count >= 3) {
+                        addSegment(p, sortedPoints, j - count, j -1);
                     }
+                    count = 1;
+                    prevSlope = currentSlope;
                 }
             }
+
+            // check the last group of collinear points
+            if (count >= 3) {
+                addSegment(p, sortedPoints, sortedPoints.length - count, sortedPoints.length -1);
+            }
+        }
+    }        
+
+    // make sure every line segment is only added once
+    private void addSegment(Point p, Point[] points, int start, int end) {
+        Point[] collinearPoints = new Point[end - start + 2]; 
+        collinearPoints[0] = p;
+
+        for (int i = start; i <= end; i++) {
+            collinearPoints[i - start + 1] = points[i]; 
+        }
+        Arrays.sort(collinearPoints); 
+        if (p.compareTo(collinearPoints[0]) == 0) {
+            segmentsList.add(new LineSegment(collinearPoints[0], collinearPoints[collinearPoints.length - 1]));
         }
     }
 
@@ -47,20 +69,17 @@ public class BruteCollinearPoints {
             }
         }
     }
-
-    // the number of line segments
-    public int numberOfSegments() {
-        return segmentsList.size();
-    }       
     
-    // the line segments
+    public int numberOfSegments() {
+        return segmentsList.size(); 
+    }
+
     public LineSegment[] segments() {
         return segmentsList.toArray(new LineSegment[0]);
     }
-            
-    // testing client
+    
     public static void main(String[] args) {
-
+        
         // read the n points from a file
         In in = new In(args[0]);
         int n = in.readInt();
@@ -81,12 +100,12 @@ public class BruteCollinearPoints {
         }
     
         // print and draw the line segments
-        BruteCollinearPoints collinear = new BruteCollinearPoints(points);
+        FastCollinearPoints collinear = new FastCollinearPoints(points);
         StdDraw.setPenRadius(0.005); // Set the pen radius to make the line smaller
         for (LineSegment segment : collinear.segments()) {
             StdOut.println(segment);
             segment.draw();
         }
         StdDraw.show();
-    }                
+    }      
 }

@@ -1,4 +1,4 @@
-package Week3;
+//package Week3;
 /******************************************************************************
  *  Compilation:  javac Point.java
  *  Execution:    java Point
@@ -13,7 +13,6 @@ package Week3;
  import edu.princeton.cs.algs4.StdDraw;
  
  public class Point implements Comparable<Point> {
- 
     private final int x;     // x-coordinate of this point
     private final int y;     // y-coordinate of this point
 
