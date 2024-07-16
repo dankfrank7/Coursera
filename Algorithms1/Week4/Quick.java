@@ -40,7 +40,7 @@ public class Quick {
         sort(a, j+1, hi);
     }
 
-    public static COmparable select(Comparable[] a, int k) {
+    public static Comparable select(Comparable[] a, int k) {
         StdRandom.shuffle(a);
         int lo = 0, hi = a.length - 1;
         while (hi > lo) {
