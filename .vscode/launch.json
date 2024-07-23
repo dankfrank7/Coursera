@@ -6,6 +6,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Board",
+            "request": "launch",
+            "mainClass": "Week4.Board",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "Board",
+            "request": "launch",
+            "mainClass": "Board",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "Sandbox",
+            "request": "launch",
+            "mainClass": "Week4.Sandbox",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "Heap",
+            "request": "launch",
+            "mainClass": "Week4.Heap",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "UnorderedMaxPQ",
+            "request": "launch",
+            "mainClass": "Week4.UnorderedMaxPQ",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
             "name": "FastCollinearPoints",
             "request": "launch",
             "mainClass": "Week3.FastCollinearPoints",
