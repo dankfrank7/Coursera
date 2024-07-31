@@ -8,15 +8,15 @@ import edu.princeton.cs.algs4.StdOut;
 public class Solver {
     private MinPQ<Board> pq;
 
-    private class SearchNode<Board extends Comparable<Board> {
+    private class SearchNode<Board extends Comparable<Board>> {
         private int moves, hamming, manhattan;
         private Board board;
         
-        public SearchNode(Board board, int moves, int hamming, int manhattan) {
+        public SearchNode(Board board, int moves) {
             this.board = board;
             this.moves = moves;
-            this.hamming = hamming;
-            this.manhattan = manhattan;
+            this.hamming = board.hamming();
+            this.manhattan = board.manhattan();
             this.prev = null;
         }
 
