@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Solver",
+            "request": "launch",
+            "mainClass": "Week4.Solver",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
             "name": "Board",
             "request": "launch",
             "mainClass": "Week4.Board",
