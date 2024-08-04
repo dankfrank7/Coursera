@@ -1,4 +1,4 @@
-package Week4;
+//package Week4;
 
 import java.lang.Math;
 import java.util.ArrayList;
@@ -172,7 +172,7 @@ public class Board {
         throw new Error("Empty tile not found");
     }
         
-    // exchanges two values 
+    // exchanges two values d
     private void exch(Index2 p, Index2 q) {
         int temp = this.tiles[q.row][q.col];
         this.tiles[q.row][q.col] = this.tiles[p.row][p.col];
@@ -240,10 +240,8 @@ public class Board {
         System.out.println("Manhattan dist: " + board.manhattan());
 
         // print neighbors
-        for (Board neighbor : board2.neighbors()) {
-            System.out.println(neighbor);
-            System.out.println("-----");
-        }
+        System.out.println(board);
+        System.out.println(board.twin());
 
     }
 }

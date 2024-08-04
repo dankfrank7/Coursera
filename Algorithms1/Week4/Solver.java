@@ -1,4 +1,4 @@
-package Week4;
+//package Week4;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.MinPQ;
@@ -6,31 +6,50 @@ import edu.princeton.cs.algs4.StdOut;
 import java.util.LinkedList;
 
 public class Solver {
-    private MinPQ<SearchNode> pq;
+    private MinPQ<SearchNode> pq, pqTwin;
     private boolean solvable;
     private SearchNode goalNode;
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initialBoard) {
-        if (initialBoard == null) throw new IllegalArgumentException("Initial board is null");
+        if (initialBoard == null) throw new IllegalArgumentException("Initial board is null.");
 
-        SearchNode initialNode = new SearchNode(initialBoard, 0, null);
-        
         pq = new MinPQ<>();
-        pq.insert(initialNode);
+        pqTwin = new MinPQ<>();
+        initialiseQueues(initialBoard);
 
-        while (true) {        
-            SearchNode current = pq.delMin();
-            if (current.isGoal()) {
-                solvable = true;
-                goalNode = current;
-                break; 
-            }
-            for (Board neighborBoard: current.board.neighbors()) { 
-                if (neighborBoard != current.prev.board) {
-                    SearchNode neighborNode = new SearchNode(neighborBoard, current.moves + 1, current);
-                    pq.insert(neighborNode);                    
-                }
+        while(!isResolved()) {
+            expandNode(pq, true);
+            expandNode(pqTwin, false);
+        }
+    }
+
+    private void initialiseQueues(Board initialBoard) {
+        pq.insert(new SearchNode(initialBoard, 0, null));
+        pqTwin.insert(new SearchNode(initialBoard.twin(), 0, null));
+    }
+
+    private boolean isResolved() {
+        SearchNode current = pq.min();
+        SearchNode currentTwin = pqTwin.min();
+
+        if (current.isGoal()) {
+            solvable = true;
+            goalNode = current;
+            return true;
+        } else if (currentTwin.isGoal()) {
+            solvable = false;
+            return true;
+        }
+        return false;
+    }
+
+    private void expandNode(MinPQ<SearchNode> queue, boolean isPrimary) {
+        SearchNode current = queue.delMin();
+
+        for (Board neighbor : current.board.neighbors()) {
+            if (current.prev == null || !neighbor.equals(current.prev.board)) {
+                queue.insert(new SearchNode(neighbor, current.moves+1, current));
             }
         }
     }
@@ -45,7 +64,7 @@ public class Solver {
             this.moves = moves;
             this.hamming = board.hamming();
             this.manhattan = board.manhattan();
-            this.priority = this.hamming + this.moves;
+            this.priority = this.manhattan + this.moves; // priority function
             this.prev = prev;
         }
 
@@ -83,16 +102,13 @@ public class Solver {
     public static void main(String[] args) {
 
         // create initial board from file
-        // In in = new In(args[0]);
-        // int n = in.readInt();
-        // int[][] tiles = new int[n][n];
-        // for (int i = 0; i < n; i++)
-        //     for (int j = 0; j < n; j++)
-        //         tiles[i][j] = in.readInt();
-        
-        int[][] tiles2 = {{0, 1, 3}, {4, 2, 5}, {7, 6, 5}};
-        
-        Board initial = new Board(tiles2);
+        In in = new In(args[0]);
+        int n = in.readInt();
+        int[][] tiles = new int[n][n];
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                tiles[i][j] = in.readInt();
+        Board initial = new Board(tiles);
 
         // solve the puzzle
         Solver solver = new Solver(initial);
