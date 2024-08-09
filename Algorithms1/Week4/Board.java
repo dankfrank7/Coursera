@@ -58,7 +58,7 @@ public class Board {
         return countIncorrect;
     }
 
-    public static int[][] getTargetMat(int n) {
+    private static int[][] getTargetMat(int n) {
         int[][] targetMatrix = new int[n][n];
         int val = 1;
         for (int row = 0; row < n; row++) {

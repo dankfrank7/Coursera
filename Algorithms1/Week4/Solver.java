@@ -109,10 +109,10 @@ public class Solver {
             for (int j = 0; j < n; j++)
                 tiles[i][j] = in.readInt();
         Board initial = new Board(tiles);
-
+    
         // solve the puzzle
         Solver solver = new Solver(initial);
-
+    
         // print solution to standard output
         if (!solver.isSolvable())
             StdOut.println("No solution possible");
