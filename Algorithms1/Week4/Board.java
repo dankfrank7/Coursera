@@ -1,6 +1,5 @@
-//package Week4;
+package Week4;
 
-import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,17 +20,17 @@ public class Board {
     }
            
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < this.tiles.length; i++) {
-            for (int j = 0; j < this.tiles[i].length; j++) {
-                sb.append(this.tiles[i][j]);
-                if (j < this.tiles[i].length - 1) {
-                    sb.append(" ");
-                }
+        StringBuilder s = new StringBuilder();
+        int n = dimension();
+        s.append(n).append("\n");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (j != 0) s.append(" ");
+                s.append(String.format("%2d", tiles[i][j]));
             }
-            sb.append("\n");
+            s.append("\n");
         }
-        return sb.toString();
+        return s.toString();
     }
 
     // board dimension n
@@ -41,21 +40,20 @@ public class Board {
 
     // number of tiles out of place
     public int hamming() {
-        int target = 1;
-        int countIncorrect = 0;
-        for (int row = 0; row < this.n; row++) {
-            for (int col = 0; col < this.n; col++) { 
-                if (this.tiles[row][col] != target) { 
-                    countIncorrect++;
-                }
-                if (target < 8) {
-                    target++;
-                } else {
-                    break;
+        int count = 0;
+        int length = tiles.length;
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < length; j++) {
+                if (tiles[i][j] != 0 && tiles[i][j] != goalPosition(i, j)) {
+                    count++;
                 }
             }
         }
-        return countIncorrect;
+        return count;
+    }
+    
+    private int goalPosition(int i, int j) {
+        return i * tiles.length + j + 1;
     }
 
     private static int[][] getTargetMat(int n) {
@@ -75,9 +73,9 @@ public class Board {
         return targetMatrix;
     }
 
-    private static Board getTargetBoard(int n) {
-        return new Board(Board.getTargetMat(n));
-    }
+    // private static Board getTargetBoard(int n) {
+    //     return new Board(Board.getTargetMat(n));
+    // }
 
     // sum of Manhattan distances between tiles and goal
     public int manhattan() {
@@ -221,27 +219,11 @@ public class Board {
 
     // unit testing (not graded)
     public static void main(String[] args) {
-        int n = 3;    
+        int n = 10;    
         // create matrix
         int[][] tiles = Board.getTargetMat(n);
-        int[][] tiles2 = {{8, 1, 3}, {4, 0, 2}, {7, 6, 5}};
         // create board instance
         Board board = new Board(tiles);
-        Board board2 = new Board(tiles2);
-        // printing
-        System.out.println("Target board:");
         System.out.println(board);
-        System.out.println("Test board:");
-        System.out.println(board2);
-        System.out.println("targetBoard.isGoal? "+ board.isGoal());
-        System.out.println("targetBoard.equals(otherBoard)? " +board.equals(board2));
-        
-        System.out.println("Hamming dist: " + board.hamming());
-        System.out.println("Manhattan dist: " + board.manhattan());
-
-        // print neighbors
-        System.out.println(board);
-        System.out.println(board.twin());
-
     }
 }

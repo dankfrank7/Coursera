@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LLRBBST",
+            "request": "launch",
+            "mainClass": "Week5.LLRBBST",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "FrequencyCounter",
+            "request": "launch",
+            "mainClass": "Week5.FrequencyCounter",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "ST",
+            "request": "launch",
+            "mainClass": "Week5.ST",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
             "name": "Solver",
             "request": "launch",
             "mainClass": "Week4.Solver",

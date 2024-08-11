@@ -1,4 +1,4 @@
-//package Week4;
+package Week4;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.MinPQ;
@@ -17,10 +17,10 @@ public class Solver {
         pq = new MinPQ<>();
         pqTwin = new MinPQ<>();
         initialiseQueues(initialBoard);
-
-        while(!isResolved()) {
-            expandNode(pq, true);
-            expandNode(pqTwin, false);
+ 
+        while (!isResolved()) {
+            expandNode(pq);
+            expandNode(pqTwin);
         }
     }
 
@@ -44,7 +44,7 @@ public class Solver {
         return false;
     }
 
-    private void expandNode(MinPQ<SearchNode> queue, boolean isPrimary) {
+    private void expandNode(MinPQ<SearchNode> queue) {
         SearchNode current = queue.delMin();
 
         for (Board neighbor : current.board.neighbors()) {
@@ -55,14 +55,13 @@ public class Solver {
     }
     
     private class SearchNode implements Comparable<SearchNode> {
-        private int hamming, moves, manhattan, priority;
+        private int moves, manhattan, priority;
         private Board board;
         private SearchNode prev;
         
         public SearchNode(Board board, int moves, SearchNode prev) {
             this.board = board;
             this.moves = moves;
-            this.hamming = board.hamming();
             this.manhattan = board.manhattan();
             this.priority = this.manhattan + this.moves; // priority function
             this.prev = prev;
