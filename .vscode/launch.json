@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "OrthogonalLineSegement",
+            "request": "launch",
+            "mainClass": "Week5.OrthogonalLineSegement",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
             "name": "LLRBBST",
             "request": "launch",
             "mainClass": "Week5.LLRBBST",

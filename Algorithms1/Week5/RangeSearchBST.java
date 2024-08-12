@@ -88,6 +88,44 @@ public class RangeSearchBST<Key extends Comparable<Key>, Value> {
         }
         return null; // should never reach here
     }
+
+    public void delete(Key key) {
+        root = delete(root, key);
+    }
+
+    private Node delete(Node x, Key key) {
+        if (x == null) return null;
+
+        int cmp = key.compareTo(x.key);
+        if (cmp < 0) {
+            x.left = delete(x.left, key);
+        } else if (cmp > 0) {
+            x.right = delete(x.right, key);
+        } else {
+            if (x.right == null) return x.left;
+            if (x.left == null) return x.right;
+            
+            // Node with two children: Get the in-order successor (smallest in the right subtree)
+            Node t = x;
+            x = min(t.right);
+            x.right = deleteMin(t.right);
+            x.left = t.left;
+        }
+        x.size = size(x.left) + size(x.right) + 1;
+        return x;
+    }
+
+    private Node deleteMin(Node x) {
+        if (x.left == null) return x.right;
+        x.left = deleteMin(x.left);
+        x.size = size(x.left) + size(x.right) + 1;
+        return x;
+    }
+
+    private Node min(Node x) { 
+        if (x.left == null) return x;
+        else                return min(x.left);
+    }
     
     private static void visualiseBST(RangeSearchBST.Node node) {
         if (node == null) return;
