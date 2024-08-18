@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "IntervalST",
+            "request": "launch",
+            "mainClass": "Week5.IntervalST",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
             "name": "OrthogonalLineSegement",
             "request": "launch",
             "mainClass": "Week5.OrthogonalLineSegement",
