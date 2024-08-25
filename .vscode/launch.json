@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "NearestNeighborVisualizer",
+            "request": "launch",
+            "mainClass": "Week5.NearestNeighborVisualizer",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "RangeSearchVisualizer",
+            "request": "launch",
+            "mainClass": "Week5.RangeSearchVisualizer",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
+            "name": "KdTreeVisualizer",
+            "request": "launch",
+            "mainClass": "Week5.KdTreeVisualizer",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
             "name": "IntervalST",
             "request": "launch",
             "mainClass": "Week5.IntervalST",
