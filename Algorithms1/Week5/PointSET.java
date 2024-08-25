@@ -1,6 +1,8 @@
-package Week5; 
+// package Week5; 
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.princeton.cs.algs4.SET;
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
@@ -61,10 +63,10 @@ public class PointSET {
         if (p == null) throw new IllegalArgumentException("PointSET.nearest: Point2D p is null");
 
         Point2D nearest = null;
-        double nearestDist = Double.MAX_VALUE;
+        double nearestDist = Double.POSITIVE_INFINITY;
 
         for (Point2D point : points) {
-            double dist = p.distanceTo(point);
+            double dist = p.distanceSquaredTo(point);
             if (dist < nearestDist) {
                 nearestDist = dist;
                 nearest = point;

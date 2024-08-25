@@ -1,11 +1,10 @@
-package Week5;
+// package Week5;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
-import edu.princeton.cs.algs4.SET;
 
 public class KdTree {
     private static final boolean VERTICAL = true;       // x-coordinate
@@ -108,11 +107,11 @@ public class KdTree {
     
         RectHV leftRect, rightRect;
         if (node.dim == VERTICAL) {
-            leftRect = new RectHV(rect.xmin(), rect.ymin(), node.p.x(), rect.ymax());
-            rightRect = new RectHV(node.p.x(), rect.ymin(), rect.xmax(), rect.ymax());
+            leftRect = new RectHV(0., 0., node.p.x(), 1.);
+            rightRect = new RectHV(node.p.x(), 0., 1., 1.);
         } else {
-            leftRect = new RectHV(rect.xmin(), rect.ymin(), rect.xmax(), node.p.y());
-            rightRect = new RectHV(rect.xmin(), node.p.y(), rect.xmax(), rect.ymax());
+            leftRect = new RectHV(0., 0., 1., node.p.y());
+            rightRect = new RectHV(0., node.p.y(), 1. , 1.);
         }
     
         if (rect.intersects(leftRect)) {
