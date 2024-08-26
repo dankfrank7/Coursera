@@ -50,15 +50,15 @@ public class KdTree {
     private Node insert(Node node, Point2D p, boolean dim) {
         if (node == null) {
             this.size++;
-            return new Node(p, VERTICAL); // start with vertical
+            return new Node(p, dim); // start with vertical
         }
         int cmp;
         if (dim == VERTICAL) cmp = Point2D.X_ORDER.compare(p, node.p); // vertical
         else                 cmp = Point2D.Y_ORDER.compare(p, node.p); // horizontal
         
-        if      (cmp < 0) node.left = insert(node.left, p, !node.dim);
-        else if (cmp > 0) node.right = insert(node.right, p, !node.dim);
-        else if (!node.p.equals(p)) node.right = insert(node.right, p, !node.dim); // handle duplicate points
+        if      (cmp < 0)           node.left = insert(node.left, p, !dim);
+        else if (cmp > 0)           node.right = insert(node.right, p, !dim);
+        else if (!node.p.equals(p)) node.right = insert(node.right, p, !dim); // if value is equal, add to right tree?
     
         return node;
     }
@@ -143,11 +143,17 @@ public class KdTree {
             first = node.right;
             second = node.left;
         }
-    
+     
+        // check neighbour rect
         nearest = nearest(first, p, nearest, !dim);
-        if (second != null && 
-            ((dim == VERTICAL && Math.abs(p.x() - node.p.x()) < nearest.distanceSquaredTo(p)) || 
-             (dim == HORIZONTAL && Math.abs(p.y() - node.p.y()) < nearest.distanceSquaredTo(p)))) {
+        double distToSplitLine;
+        if (dim == VERTICAL) {
+            distToSplitLine = Math.pow(p.x() - node.p.x(), 2);
+        } else {
+            distToSplitLine = Math.pow(p.y() - node.p.y(), 2);
+        }
+     
+        if (distToSplitLine < nearest.distanceSquaredTo(p)) {
             nearest = nearest(second, p, nearest, !dim);
         }
         return nearest;
