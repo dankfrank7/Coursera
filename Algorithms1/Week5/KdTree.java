@@ -1,10 +1,12 @@
-// package Week5;
+package Week5;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
+import edu.princeton.cs.algs4.StdDraw;
 
 public class KdTree {
     private static final boolean VERTICAL = true;       // x-coordinate
@@ -81,45 +83,78 @@ public class KdTree {
         else return contains(node.right, p, !dim);
     }
 
-    //  draw all points to standard draw
     public void draw() {
-        draw(root);
+        draw(root, new RectHV(0, 0, 1, 1));
     }
 
-    private void draw(Node node) {
+    private void draw(Node node, RectHV rect) {
         if (node == null) return;
+
+        // Draw the point
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.setPenRadius(0.01);
         node.p.draw();
-        draw(node.left);
-        draw(node.right);
+
+        // Draw the splitting line
+        if (node.dim == VERTICAL) {
+            StdDraw.setPenColor(StdDraw.RED);
+            StdDraw.setPenRadius();
+            StdDraw.line(node.p.x(), rect.ymin(), node.p.x(), rect.ymax());
+            draw(node.left, new RectHV(rect.xmin(), rect.ymin(), node.p.x(), rect.ymax()));
+            draw(node.right, new RectHV(node.p.x(), rect.ymin(), rect.xmax(), rect.ymax()));
+        } else {
+            StdDraw.setPenColor(StdDraw.BLUE);
+            StdDraw.setPenRadius();
+            StdDraw.line(rect.xmin(), node.p.y(), rect.xmax(), node.p.y());
+            draw(node.left, new RectHV(rect.xmin(), rect.ymin(), rect.xmax(), node.p.y()));
+            draw(node.right, new RectHV(rect.xmin(), node.p.y(), rect.xmax(), rect.ymax()));
+        }
     }
 
     // all points that are inside the rectangle (or on the boundary)
     public Iterable<Point2D> range(RectHV rect) {
         if (rect == null) throw new IllegalArgumentException("KdTree.range: RectHV rect is null");
         List<Point2D> inside = new ArrayList<>();
-        range(root, inside, rect);
+        range(root, rect, inside);
         return inside;
     }
 
-    private void range(Node node, List<Point2D> inside, RectHV rect) {
-        if (node == null) return;
-        if (rect.contains(node.p)) inside.add(node.p);
+    private void range(Node node, RectHV rect, List<Point2D> inside) {
+        if (node == null) {
+            return;
+        }
     
-        RectHV leftRect, rightRect;
+        if (rect.contains(node.p)) {
+            inside.add(node.p);
+        }
+    
+        // Check if the current node splits the space vertically (X-axis) or horizontally (Y-axis)
         if (node.dim == VERTICAL) {
-            leftRect = new RectHV(0., 0., node.p.x(), 1.);
-            rightRect = new RectHV(node.p.x(), 0., 1., 1.);
+            // Vertical segment
+            if (rect.xmin() <= node.p.x() && node.p.x() <= rect.xmax()) {
+                // The vertical line intersects with the query rectangle
+                range(node.left, rect, inside);
+                range(node.right, rect, inside);
+            } else if (rect.xmin() > node.p.x()) {
+                // Search right
+                range(node.right, rect, inside);
+            } else {
+                // Search left
+                range(node.left, rect, inside);
+            }
         } else {
-            leftRect = new RectHV(0., 0., 1., node.p.y());
-            rightRect = new RectHV(0., node.p.y(), 1. , 1.);
-        }
-    
-        if (rect.intersects(leftRect)) {
-            range(node.left, inside, rect);
-        }
-    
-        if (rect.intersects(rightRect)) {
-            range(node.right, inside, rect);
+            // Horizontal segment
+            if (rect.ymin() <= node.p.y() && node.p.y() <= rect.ymax()) {
+                // The horizontal line intersects with the query rectangle
+                range(node.left, rect, inside);
+                range(node.right, rect, inside);
+            } else if (rect.ymin() > node.p.y()) {
+                // Search above
+                range(node.right, rect, inside);
+            } else {
+                // Search below
+                range(node.left, rect, inside);
+            }
         }
     }
 
@@ -143,24 +178,64 @@ public class KdTree {
             first = node.right;
             second = node.left;
         }
-     
-        // check neighbour rect
+    
         nearest = nearest(first, p, nearest, !dim);
+    
         double distToSplitLine;
         if (dim == VERTICAL) {
             distToSplitLine = Math.pow(p.x() - node.p.x(), 2);
         } else {
             distToSplitLine = Math.pow(p.y() - node.p.y(), 2);
         }
-     
+    
         if (distToSplitLine < nearest.distanceSquaredTo(p)) {
             nearest = nearest(second, p, nearest, !dim);
         }
         return nearest;
     }
 
+
     public static void main(String[] args) {
+        // Create a new KdTree
+        KdTree kdTree = new KdTree();
 
+        // Generate and insert 20 random points into the KdTree
+        Random rand = new Random();
+        for (int i = 0; i < 30; i++) {
+            double x = rand.nextDouble(); // Random x-coordinate between 0 and 1
+            double y = rand.nextDouble(); // Random y-coordinate between 0 and 1
+            Point2D point = new Point2D(x, y);
+            kdTree.insert(point);
+        }
+
+        // Define a rectangle for the range search
+        RectHV rect = new RectHV(0.3, 0.3, 0.8, 0.7);
+
+        // Perform range search to find all points inside the rectangle
+        Iterable<Point2D> pointsInRange = kdTree.range(rect);
+
+        // Set up the drawing canvas
+        StdDraw.clear();
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.setPenRadius(0.01);
+
+        // Draw the KdTree with subdivision lines
+        kdTree.draw();
+
+        // Draw the rectangle for the range search
+        StdDraw.setPenColor(StdDraw.GREEN);
+        StdDraw.setPenRadius();
+        rect.draw();
+
+        // Highlight the points inside the rectangle
+        StdDraw.setPenColor(StdDraw.GREEN);
+        StdDraw.setPenRadius(0.02);
+        for (Point2D p : pointsInRange) {
+            p.draw();
+        }
+
+        // Show the final drawing
+        StdDraw.show();
     }
-
+    
 }

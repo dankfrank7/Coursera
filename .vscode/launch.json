@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "KdTree",
+            "request": "launch",
+            "mainClass": "Week5.KdTree",
+            "projectName": "Coursera_75b50552"
+        },
+        {
+            "type": "java",
             "name": "NearestNeighborVisualizer",
             "request": "launch",
             "mainClass": "Week5.NearestNeighborVisualizer",
